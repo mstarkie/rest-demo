@@ -31,12 +31,14 @@
 						<th class="red">First Name</th>
 						<th class="red">Last Name</th>
 						<th class="red">Last Updated</th>
+						<th class="red">Delete</th>
 					</tr>
 					<tr th:each="data : ${employees}">
 						<td th:text="${data.badgeNumber}">Badge Number</td>
 						<td th:text="${data.firstName}">First Name</td>
 						<td th:text="${data.lastName}">Last Name</td>
 						<td th:text="${data.lastUpdated}">Last Updated</td>
+						<td><button onclick="location.href = 'addEmployee'">Remove</button></td>
 					</tr>
 				</table>
 			</div>
