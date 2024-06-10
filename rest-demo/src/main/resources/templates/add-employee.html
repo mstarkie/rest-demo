@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<!--
+ *  Thymeleaf Expressions:
+ *       Variable Expressions: ${...}
+ *       Selection Variable Expressions: *{...}
+ *       Message Expressions: #{...}
+ *       Link URL Expressions: @{...}
+ *       Fragment Expressions: ~{...}
+ -->
+<html xmlns="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="utf-8">
+	<Title>MVC Demo</Title>
+	<link rel="stylesheet" th:href="@{webjars/bootstrap/5.1.0/css/bootstrap.min.css}" />
+	<link rel="stylesheet" th:href="@{/css/main.css}" />
+</head>
+
+<body>
+	<main role="main" class="container">
+		<div class="header">
+			<h1>Add Employee</h1>
+		</div>
+		<div align="center">
+			<form action="#" th:action="@{/view/save}" th:object="${employee}" method="post">
+				<label>Badge Number:</label>
+				<input type="text" th:field="*{badgeNumber}">
+				<label>First Name:</label>
+				<input type="text" th:field="*{firstName}">
+				<label>Last Name:</label>
+				<input type="text" th:field="*{lastName}">
+				<input type="submit" value="Add Employee">
+			</form>
+		</div>
+	</main>
+</body>

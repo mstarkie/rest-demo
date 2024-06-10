@@ -3,6 +3,11 @@ package com.globalforge.gdeb;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 
+/**
+ * Tests the web service against a live controller and database
+ * @author Michael C. Starkie
+ *
+ */
 public class EmployeeClient {
     public static final String SERVER_URI = "http://localhost:8080/employees";
     private static void testGetEmployee(int badge) {
@@ -12,10 +17,13 @@ public class EmployeeClient {
         System.out.println("testGetEmployee(): " + emp);
     }
 
-    private static void testCreateEmployee() {
+    /**
+     * Create a new record
+     */
+    private static void testCreateEmployee(int badge) {
         RestTemplate restTemplate = new RestTemplate();
         Employee emp = new Employee();
-        emp.setBadgeNumber(1);
+        emp.setBadgeNumber(badge);
         emp.setFirstName("John");
         emp.setLastName("Doe");
         Employee response = restTemplate.postForObject(SERVER_URI + "/save",
@@ -23,6 +31,10 @@ public class EmployeeClient {
         System.out.println("testCreateEmployee(): " + response);
     }
 
+    /**
+     * Update a record given a badge number
+     * @param badge the badge number
+     */
     private static void testUpdateEmployee(int badge) {
         RestTemplate restTemplate = new RestTemplate();
         Employee emp = new Employee();
@@ -32,6 +44,10 @@ public class EmployeeClient {
         restTemplate.put(SERVER_URI + "/badge/" + badge, emp);
     }
 
+    /**
+     * delete a record given a badge number
+     * @param badge The badge number
+     */
     private static void testDeleteEmployee(int badge) {
         RestTemplate restTemplate = new RestTemplate();
         Employee emp = new Employee();
@@ -41,6 +57,9 @@ public class EmployeeClient {
         restTemplate.delete(SERVER_URI + "/badge/" + badge);
     }
 
+    /**
+     * return all rows from the Employees table
+     */
     private static void testGetAllEmployess() {
         RestTemplate restTemplate = new RestTemplate();
         ResponseEntity<Employee[]> response = restTemplate
@@ -53,7 +72,7 @@ public class EmployeeClient {
 
     public static void main(String args[]) {
         testGetEmployee(169272);
-        testCreateEmployee();
+        testCreateEmployee(1);
         testGetEmployee(1);
         testUpdateEmployee(1);
         testGetEmployee(1);

@@ -22,6 +22,11 @@ import lombok.ToString;
 @EqualsAndHashCode
 @AllArgsConstructor
 @NoArgsConstructor
+/**
+ * One to one mapping of Employee to rows in an Employees table. The is the DATA
+ * MODEL in the MVC pattern.
+ * @author Michael C. Starkie
+ */
 public class Employee {
     @Id
     @Column(name = "badge_number")

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<!--
+ *  Thymeleaf Expressions:
+ *       Variable Expressions: ${...}
+ *       Selection Variable Expressions: *{...}
+ *       Message Expressions: #{...}
+ *       Link URL Expressions: @{...}
+ *       Fragment Expressions: ~{...}
+ -->
+<html xmlns="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="utf-8">
+	<Title>MVC Demo</Title>
+	<link rel="stylesheet" th:href="@{webjars/bootstrap/5.1.0/css/bootstrap.min.css}" />
+	<link rel="stylesheet" th:href="@{/css/main.css}" />
+</head>
+
+<body>
+	<main role="main" class="container">
+		<div class="header">
+			<h1>MVC with Spring and Thymeleaf Demo</h1>
+		</div>
+		<div th:action="@{/view/employees}" th:switch="${employees}">
+			<h2 th:case="null">No employees yet!</h2>
+			<div th:case="*">
+				<h1 class="center">Employee List:</h1>
+				<table class="center">
+					<tr>
+						<th class="red">Badge Number</th>
+						<th class="red">First Name</th>
+						<th class="red">Last Name</th>
+						<th class="red">Last Updated</th>
+					</tr>
+					<tr th:each="data : ${employees}">
+						<td th:text="${data.badgeNumber}">Badge Number</td>
+						<td th:text="${data.firstName}">First Name</td>
+						<td th:text="${data.lastName}">Last Name</td>
+						<td th:text="${data.lastUpdated}">Last Updated</td>
+					</tr>
+				</table>
+			</div>
+			<div align="center">
+				<h2>
+					<p><a href="/view/addEmployee">Add a new Employee</a></p>
+				</h2>
+			</div>
+		</div>
+	</main>
+</body>
+
+</html>

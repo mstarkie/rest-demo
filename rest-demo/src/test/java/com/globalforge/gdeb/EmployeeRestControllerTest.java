@@ -21,7 +21,7 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 @AutoConfigureMockMvc
 @TestMethodOrder(OrderAnnotation.class)
 @ContextConfiguration(classes = EmployeeApplication.class)
-public class EmployeeControllerTest {
+public class EmployeeRestControllerTest {
     @Autowired
     private MockMvc mockMvc;
     @BeforeEach
