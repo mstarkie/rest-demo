@@ -2,18 +2,15 @@ package com.globalforge.gdeb;
 
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 /**
  * https://www.freecodecamp.org/news/how-to-build-a-rest-api-with-spring-boot-
- * using-mysql-and-jpa-f931e348734b/
+ * using-mysql-and-jpa-f931e348734b.
  */
 @Controller
 /**
@@ -21,15 +18,26 @@ import org.springframework.web.bind.annotation.PostMapping;
  * @author Michael C. Starkie
  */
 public class EmployeeViewController {
+    /** The CRUD repository. */
     @Autowired
-    EmployeeRepository employeeRepository;
+    private EmployeeRepository employeeRepository;
+    /**
+     * Redirects to add-employee.html.
+     * @param emp The employee to add.
+     * @return The redirect page.
+     */
     @GetMapping("/view/addEmployee")
-    public String showAddEmployeeForm(Employee emp) {
+    public String showAddEmployeeForm(final Employee emp) {
         return "add-employee";
     }
 
+    /**
+     * Removes an employee from the repository.
+     * @param badgeNumber Identifies the employee to remove.
+     * @return String Redirects to the list-all-employees.html file.
+     */
     @PostMapping("/view/removeEmployee")
-    public String showRemoveEmployeeForm(@ModelAttribute("badge_no") Integer badgeNumber) {
+    public String showRemoveEmployeeForm(@ModelAttribute("badge_no") final Integer badgeNumber) {
         Employee employee;
         try {
             employee = employeeRepository.findById(badgeNumber)
@@ -41,19 +49,24 @@ public class EmployeeViewController {
         return "redirect:/view/employees";
     }
 
+    /**
+     * Inserts a new employee into the database.
+     * @param employee The employee to insert.
+     * @return String Redirects to the list-all-employees.html file.
+     */
     @PostMapping("/view/save")
-    public String insert(@ModelAttribute("employee") Employee employee) {
+    public String insert(@ModelAttribute("employee") final Employee employee) {
         employeeRepository.save(employee);
         return "redirect:/view/employees";
     }
 
     /**
      * Returns a list of all Employee records from the Employees table.
-     * http://localhost:8080/view/employees/all
-     * @return List<Employee>
+     * @param model The model.
+     * @return Redirects to the list-all-employees.html file.
      */
     @GetMapping("/view/employees")
-    public String getAll(Model model) {
+    public String getAll(final Model model) {
         List<Employee> all = employeeRepository.findAll();
         model.addAttribute("employees", all);
         return "list-all-employees";

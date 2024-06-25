@@ -28,15 +28,19 @@ import lombok.ToString;
  * @author Michael C. Starkie
  */
 public class Employee {
+    /** Employee badge number. */
     @Id
     @Column(name = "badge_number")
     private Integer badgeNumber;
+    /** Employee first name. */
     @NotBlank
     @Column(name = "first_name")
     private String firstName;
+    /** Employee last name. */
     @NotBlank
     @Column(name = "last_name")
     private String lastName;
+    /** Time stamp of last update. */
     @UpdateTimestamp
     @Column(name = "last_updated")
     private Instant lastUpdated;

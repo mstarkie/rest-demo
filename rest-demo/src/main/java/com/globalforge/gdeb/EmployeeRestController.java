@@ -14,9 +14,8 @@ import org.springframework.web.bind.annotation.RestController;
 import jakarta.validation.Valid;
 
 /**
- * Controller used in 
  * https://www.freecodecamp.org/news/how-to-build-a-rest-api-with-spring-boot-
- * using-mysql-and-jpa-f931e348734b/
+ * using-mysql-and-jpa-f931e348734b.
  */
 @RestController
 @RequestMapping("/employees")
@@ -25,18 +24,19 @@ import jakarta.validation.Valid;
  * @author Michael C. Starkie
  */
 public class EmployeeRestController {
+    /** CRUD Repository. */
     @Autowired
-    EmployeeRepository employeeRepository;
+    private EmployeeRepository employeeRepository;
     /**
      * Obtain an employee from the Employees table given a badge number.
      * http://localhost:8080/employees/badge/169272
      * @param badgeNumber
-     * @return
+     * @return Employee The employee
      * @throws EmployeeNotFoundException
      */
     @GetMapping("/badge/{badge_no}")
     public Employee getByBadge(
-        @PathVariable(name = "badge_no", required = true, value = "badge_no") Integer badgeNumber)
+        @PathVariable(name = "badge_no", required = true, value = "badge_no") final Integer badgeNumber)
         throws EmployeeNotFoundException {
         return employeeRepository.findById(badgeNumber)
             .orElseThrow(() -> new EmployeeNotFoundException(badgeNumber));
@@ -48,7 +48,7 @@ public class EmployeeRestController {
      * @return The Employee returned.
      */
     @PostMapping("/save")
-    public Employee insert(@Valid @RequestBody Employee employee) {
+    public Employee insert(@Valid @RequestBody final Employee employee) {
         return employeeRepository.save(employee);
     }
 
@@ -61,8 +61,8 @@ public class EmployeeRestController {
      */
     @PutMapping("/badge/{badge_no}")
     public Employee update(
-        @PathVariable(name = "badge_no", required = true, value = "badge_no") Integer badgeNumber,
-        @Valid @RequestBody Employee employeeDetails)
+        @PathVariable(name = "badge_no", required = true, value = "badge_no") final Integer badgeNumber,
+        @Valid @RequestBody final Employee employeeDetails)
         throws EmployeeNotFoundException {
         Employee employee = employeeRepository.findById(badgeNumber)
             .orElseThrow(() -> new EmployeeNotFoundException(badgeNumber));
@@ -76,7 +76,7 @@ public class EmployeeRestController {
     /**
      * Returns a list of all Employee records from the Employees table.
      * http://localhost:8080/employees/all
-     * @return List<Employee>
+     * @return list of all known employees
      */
     @GetMapping("/all")
     public List<Employee> getAll() {
@@ -87,10 +87,11 @@ public class EmployeeRestController {
      * Deletes a row from the Employees table given a badge number.
      * @param badgeNumber The badge number.
      * @throws EmployeeNotFoundException
+     * @return ResponseEntity The response.
      */
     @DeleteMapping("/badge/{badge_no}")
     public ResponseEntity<?> delete(
-        @PathVariable(name = "badge_no", required = true, value = "badge_no") Integer badgeNumber)
+        @PathVariable(name = "badge_no", required = true, value = "badge_no") final Integer badgeNumber)
         throws EmployeeNotFoundException {
         Employee employee = employeeRepository.findById(badgeNumber)
             .orElseThrow(() -> new EmployeeNotFoundException(badgeNumber));

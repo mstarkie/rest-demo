@@ -38,8 +38,6 @@
 						<td th:text="${data.firstName}">First Name</td>
 						<td th:text="${data.lastName}">Last Name</td>
 						<td th:text="${data.lastUpdated}">Last Updated</td>
-						<!-- td><button onclick="location.href = 'removeEmployee'">Remove</button></td -->
-						<!-- td><a class="btn btn-warning" th:href="@{/view/removeEmployee/${data}}">Delete</a></td -->
 						<td>
 							<form method="POST" th:action="@{/view/removeEmployee}">
 							    <input type="hidden" name="badge_no" id="badge_no" th:value="${data.badgeNumber}" />
