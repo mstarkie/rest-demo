@@ -14,15 +14,14 @@ import org.springframework.web.bind.annotation.RestController;
 import jakarta.validation.Valid;
 
 /**
- * Every request handling method of the controller class automatically
- * serializes return objects into HttpResponse.
+ * Controller used in 
  * https://www.freecodecamp.org/news/how-to-build-a-rest-api-with-spring-boot-
  * using-mysql-and-jpa-f931e348734b/
  */
 @RestController
 @RequestMapping("/employees")
 /**
- * This is the CONTROLLER for REST calls.
+ * This is the CONTROLLER for client/server type calls.
  * @author Michael C. Starkie
  */
 public class EmployeeRestController {

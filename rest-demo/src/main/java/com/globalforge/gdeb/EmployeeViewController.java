@@ -2,15 +2,16 @@ package com.globalforge.gdeb;
 
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 /**
- * Every request handling method of the controller class automatically
- * serializes return objects into HttpResponse.
  * https://www.freecodecamp.org/news/how-to-build-a-rest-api-with-spring-boot-
  * using-mysql-and-jpa-f931e348734b/
  */
@@ -25,6 +26,19 @@ public class EmployeeViewController {
     @GetMapping("/view/addEmployee")
     public String showAddEmployeeForm(Employee emp) {
         return "add-employee";
+    }
+
+    @PostMapping("/view/removeEmployee")
+    public String showRemoveEmployeeForm(@ModelAttribute("badge_no") Integer badgeNumber) {
+        Employee employee;
+        try {
+            employee = employeeRepository.findById(badgeNumber)
+                .orElseThrow(() -> new EmployeeNotFoundException(badgeNumber));
+            employeeRepository.delete(employee);
+        } catch (EmployeeNotFoundException e) {
+            e.printStackTrace();
+        }
+        return "redirect:/view/employees";
     }
 
     @PostMapping("/view/save")
