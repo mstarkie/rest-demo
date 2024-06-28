@@ -5,15 +5,19 @@ import org.springframework.web.client.RestTemplate;
 
 /**
  * Tests the web service against a live controller and database.
+ * 
  * @author Michael C. Starkie
  */
 public class EmployeeClient {
+
     /** The URL for testing. */
     public static final String SERVER_URI = "http://localhost:8080/employees";
     /** The test badge number. */
     public static final int TEST_BADGE_NUMBER = 169272;
+
     /**
      * Test retrieval of an employee.
+     * 
      * @param badge The badge number of the employee to retrieve.
      */
     private static void testGetEmployee(final int badge) {
@@ -24,6 +28,7 @@ public class EmployeeClient {
 
     /**
      * Create a new record.
+     * 
      * @param badge the badge number.
      */
     private static void testCreateEmployee(final int badge) {
@@ -38,6 +43,7 @@ public class EmployeeClient {
 
     /**
      * Update a record given a badge number.
+     * 
      * @param badge the badge number.
      */
     private static void testUpdateEmployee(final int badge) {
@@ -51,25 +57,30 @@ public class EmployeeClient {
 
     /**
      * delete a record given a badge number.
+     * 
      * @param badge The badge number
      */
     private static void testDeleteEmployee(final int badge) {
         RestTemplate restTemplate = new RestTemplate();
-        Employee emp = new Employee();
-        emp.setBadgeNumber(1);
-        emp.setFirstName("John");
-        emp.setLastName("Doe");
+        //Employee emp = new Employee();
+        //emp.setBadgeNumber(1);
+        //emp.setFirstName("John");
+        //emp.setLastName("Doe");
         restTemplate.delete(SERVER_URI + "/badge/" + badge);
     }
 
     /**
      * return all rows from the Employees table.
      */
-    private static void testGetAllEmployess() {
+    private static void testGetAllEmployees() {
         RestTemplate restTemplate = new RestTemplate();
         ResponseEntity<Employee[]> response = restTemplate.getForEntity(SERVER_URI + "/all",
             Employee[].class);
         Employee[] employees = response.getBody();
+        if (employees == null) {
+            System.err.println("employees was null. Check testGetAllEmployees()");
+            return;
+        }
         for (Employee emp : employees) {
             System.out.println("testGetAllEmployess(): " + emp);
         }
@@ -81,7 +92,7 @@ public class EmployeeClient {
         testGetEmployee(1);
         testUpdateEmployee(1);
         testGetEmployee(1);
-        testGetAllEmployess();
+        testGetAllEmployees();
         testDeleteEmployee(1);
     }
 }

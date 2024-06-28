@@ -1,19 +1,25 @@
 package com.globalforge.gdeb;
 
-import java.time.Instant;
-import org.hibernate.annotations.UpdateTimestamp;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
+import java.time.Instant;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+import org.hibernate.annotations.UpdateTimestamp;
 
+/**
+ * One to one mapping of Employee to rows in an Employees table. The is the DATA
+ * MODEL in the MVC pattern.
+ * 
+ * @author Michael C. Starkie
+ */
 @Entity
 @Table(name = "employee")
 @Getter
@@ -22,12 +28,8 @@ import lombok.ToString;
 @EqualsAndHashCode
 @AllArgsConstructor
 @NoArgsConstructor
-/**
- * One to one mapping of Employee to rows in an Employees table. The is the DATA
- * MODEL in the MVC pattern.
- * @author Michael C. Starkie
- */
 public class Employee {
+
     /** Employee badge number. */
     @Id
     @Column(name = "badge_number")

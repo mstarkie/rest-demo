@@ -19,6 +19,7 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 /**
  * For JUnit tests.
+ * 
  * @author Michael C. Starkie
  */
 @SpringBootTest
@@ -26,9 +27,11 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 @TestMethodOrder(OrderAnnotation.class)
 @ContextConfiguration(classes = EmployeeApplication.class)
 public class EmployeeRestControllerTest {
+
     /** The Mock MVC. */
     @Autowired
     private MockMvc mockMvc;
+
     /**
      * Sets up JUnit before each test.
      */
@@ -38,6 +41,7 @@ public class EmployeeRestControllerTest {
 
     /**
      * Get by badge.
+     * 
      * @throws Exception
      */
     @Test
@@ -51,6 +55,7 @@ public class EmployeeRestControllerTest {
 
     /**
      * Insert record.
+     * 
      * @throws Exception
      */
     @Test
@@ -67,6 +72,7 @@ public class EmployeeRestControllerTest {
 
     /**
      * Get by badge number 1.
+     * 
      * @throws Exception
      */
     @Test
@@ -81,6 +87,7 @@ public class EmployeeRestControllerTest {
 
     /**
      * Update a record.
+     * 
      * @throws Exception
      */
     @Test
@@ -97,6 +104,7 @@ public class EmployeeRestControllerTest {
 
     /**
      * Get updated badge 1.
+     * 
      * @throws Exception
      */
     @Test
@@ -111,6 +119,7 @@ public class EmployeeRestControllerTest {
 
     /**
      * Delete a record.
+     * 
      * @throws Exception
      */
     @Test

@@ -9,20 +9,22 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 /**
+ * This is the CONTROLLER in the MVC pattern which is accessed by a view.
  * https://www.freecodecamp.org/news/how-to-build-a-rest-api-with-spring-boot-
  * using-mysql-and-jpa-f931e348734b.
- */
-@Controller
-/**
- * This is the CONTROLLER in the MVC pattern which is accessed by a view.
+ * 
  * @author Michael C. Starkie
  */
+@Controller
 public class EmployeeViewController {
+
     /** The CRUD repository. */
     @Autowired
     private EmployeeRepository employeeRepository;
+
     /**
      * Redirects to add-employee.html.
+     * 
      * @param emp The employee to add.
      * @return The redirect page.
      */
@@ -33,6 +35,7 @@ public class EmployeeViewController {
 
     /**
      * Removes an employee from the repository.
+     * 
      * @param badgeNumber Identifies the employee to remove.
      * @return String Redirects to the list-all-employees.html file.
      */
@@ -51,6 +54,7 @@ public class EmployeeViewController {
 
     /**
      * Inserts a new employee into the database.
+     * 
      * @param employee The employee to insert.
      * @return String Redirects to the list-all-employees.html file.
      */
@@ -62,6 +66,7 @@ public class EmployeeViewController {
 
     /**
      * Returns a list of all Employee records from the Employees table.
+     * 
      * @param model The model.
      * @return Redirects to the list-all-employees.html file.
      */
