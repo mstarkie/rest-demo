@@ -16,57 +16,60 @@ public class EmployeeClient {
     public static final int TEST_BADGE_NUMBER = 169272;
 
     /**
-     * Test retrieval of an employee.
-     * 
-     * @param badge The badge number of the employee to retrieve.
-     */
-    private static void testGetEmployee(final int badge) {
-        RestTemplate restTemplate = new RestTemplate();
-        Employee emp = restTemplate.getForObject(SERVER_URI + "/badge/" + badge, Employee.class);
-        System.out.println("testGetEmployee(): " + emp);
-    }
-
-    /**
      * Create a new record.
      * 
-     * @param badge the badge number.
+     * @param badgeNo The badge number.
+     * @param firstName The first name of the employee.
+     * @param lastName The last name of the employee.
      */
-    private static void testCreateEmployee(final int badge) {
+    private static void testCreateEmployee(final int badgeNo, final String firstName,
+        final String lastName) {
         RestTemplate restTemplate = new RestTemplate();
         Employee emp = new Employee();
-        emp.setBadgeNumber(badge);
-        emp.setFirstName("John");
-        emp.setLastName("Doe");
+        emp.setBadgeNumber(badgeNo);
+        emp.setFirstName(firstName);
+        emp.setLastName(lastName);
         Employee response = restTemplate.postForObject(SERVER_URI + "/save", emp, Employee.class);
         System.out.println("testCreateEmployee(): " + response);
     }
 
     /**
+     * Test retrieval of an employee.
+     * 
+     * @param badgeNo The badge number of the employee to retrieve.
+     */
+    private static void testGetEmployee(final int badgeNo) {
+        RestTemplate restTemplate = new RestTemplate();
+        Employee emp = restTemplate.getForObject(SERVER_URI + "/badge/" + TEST_BADGE_NUMBER,
+            Employee.class);
+        System.out.println("testGetEmployee(): " + emp);
+    }
+
+    /**
      * Update a record given a badge number.
      * 
-     * @param badge the badge number.
+     * @param badgeNo the badge number.
+     * @param firstName The first name of the employee.
+     * @param lastName The last name of the employee.
      */
-    private static void testUpdateEmployee(final int badge) {
+    private static void testUpdateEmployee(final int badgeNo, final String firstName,
+        final String lastName) {
         RestTemplate restTemplate = new RestTemplate();
         Employee emp = new Employee();
-        emp.setBadgeNumber(badge);
-        emp.setFirstName("Jane");
-        emp.setLastName("Doe");
-        restTemplate.put(SERVER_URI + "/badge/" + badge, emp);
+        emp.setBadgeNumber(badgeNo);
+        emp.setFirstName(firstName);
+        emp.setLastName(lastName);
+        restTemplate.put(SERVER_URI + "/badge/" + badgeNo, emp);
     }
 
     /**
      * delete a record given a badge number.
      * 
-     * @param badge The badge number
+     * @param badgeNo The badge number
      */
-    private static void testDeleteEmployee(final int badge) {
+    private static void testDeleteEmployee(final int badgeNo) {
         RestTemplate restTemplate = new RestTemplate();
-        //Employee emp = new Employee();
-        //emp.setBadgeNumber(1);
-        //emp.setFirstName("John");
-        //emp.setLastName("Doe");
-        restTemplate.delete(SERVER_URI + "/badge/" + badge);
+        restTemplate.delete(SERVER_URI + "/badge/" + badgeNo);
     }
 
     /**
@@ -87,12 +90,15 @@ public class EmployeeClient {
     }
 
     public static void main(final String[] args) {
+        testCreateEmployee(TEST_BADGE_NUMBER, "Michael", "Starkie");
         testGetEmployee(TEST_BADGE_NUMBER);
-        testCreateEmployee(1);
-        testGetEmployee(1);
-        testUpdateEmployee(1);
-        testGetEmployee(1);
+        testUpdateEmployee(TEST_BADGE_NUMBER, "Miguel", "Starkie");
+        testGetEmployee(TEST_BADGE_NUMBER);
+        testCreateEmployee(42, "Jane", "Doe");
         testGetAllEmployees();
-        testDeleteEmployee(1);
+        testDeleteEmployee(TEST_BADGE_NUMBER);
+        testGetAllEmployees();
+        testDeleteEmployee(42);
+        testGetAllEmployees();
     }
 }

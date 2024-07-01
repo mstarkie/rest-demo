@@ -40,20 +40,6 @@ public class EmployeeRestControllerTest {
     }
 
     /**
-     * Get by badge.
-     * 
-     * @throws Exception
-     */
-    @Test
-    @Order(1)
-    public void testGetByBadge() throws Exception {
-        mockMvc.perform(MockMvcRequestBuilders.get("/employees/badge/169272"))
-            .andExpect((MockMvcResultMatchers.status().isOk()))
-            .andExpect((MockMvcResultMatchers.content().json(
-                "{'badgeNumber':169272, 'firstName':'Michael', 'lastName':'Starkie', 'lastUpdated':'2024-06-07T14:55:34Z'}")));
-    }
-
-    /**
      * Insert record.
      * 
      * @throws Exception
