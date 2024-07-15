@@ -96,6 +96,10 @@ public class EmployeeClient {
         testGetEmployee(TEST_BADGE_NUMBER);
         testCreateEmployee(42, "Jane", "Doe");
         testGetAllEmployees();
+        try {
+            Thread.sleep(30000);
+        } catch (InterruptedException e) {
+        }
         testDeleteEmployee(TEST_BADGE_NUMBER);
         testGetAllEmployees();
         testDeleteEmployee(42);

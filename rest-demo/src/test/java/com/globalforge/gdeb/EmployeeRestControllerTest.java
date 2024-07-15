@@ -45,7 +45,7 @@ public class EmployeeRestControllerTest {
      * @throws Exception
      */
     @Test
-    @Order(2)
+    @Order(1)
     public void testInsert() throws Exception {
         mockMvc
             .perform(MockMvcRequestBuilders.post("/employees/save")
@@ -62,7 +62,7 @@ public class EmployeeRestControllerTest {
      * @throws Exception
      */
     @Test
-    @Order(3)
+    @Order(2)
     public void testGetByNewBadge() throws Exception {
         mockMvc.perform(MockMvcRequestBuilders.get("/employees/badge/1"))
             .andExpect((MockMvcResultMatchers.status().isOk()))
@@ -77,7 +77,7 @@ public class EmployeeRestControllerTest {
      * @throws Exception
      */
     @Test
-    @Order(4)
+    @Order(3)
     public void testUpdate() throws Exception {
         mockMvc
             .perform(MockMvcRequestBuilders.put("/employees/badge/1")
@@ -94,7 +94,7 @@ public class EmployeeRestControllerTest {
      * @throws Exception
      */
     @Test
-    @Order(5)
+    @Order(4)
     public void testGetUpdatedBadge() throws Exception {
         mockMvc.perform(MockMvcRequestBuilders.get("/employees/badge/1"))
             .andExpect((MockMvcResultMatchers.status().isOk()))
@@ -109,7 +109,7 @@ public class EmployeeRestControllerTest {
      * @throws Exception
      */
     @Test
-    @Order(6)
+    @Order(5)
     public void testDeleteBadge() throws Exception {
         mockMvc
             .perform(MockMvcRequestBuilders.delete("/employees/badge/1")

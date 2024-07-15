@@ -29,7 +29,18 @@ public class EmployeeRestController {
     private EmployeeRepository employeeRepository;
 
     /**
-     * Obtain an employee from the Employees table given a badge number.
+     * CREATE: Inserts an Employee record into the Employees table.
+     * 
+     * @param employee The employee
+     * @return The Employee returned.
+     */
+    @PostMapping("/save")
+    public Employee insert(@Valid @RequestBody final Employee employee) {
+        return employeeRepository.save(employee);
+    }
+
+    /**
+     * RETRIEVE: Obtain an employee from the Employees table given a badge number.
      * http://localhost:8080/employees/badge/169272
      * 
      * @param badgeNumber Employee badge number.
@@ -45,18 +56,18 @@ public class EmployeeRestController {
     }
 
     /**
-     * Inserts an Employee record into the Employees table.
+     * RETRIEVE: Returns a list of all Employee records from the Employees table.
+     * http://localhost:8080/employees/all
      * 
-     * @param employee The employee
-     * @return The Employee returned.
+     * @return list of all known employees
      */
-    @PostMapping("/save")
-    public Employee insert(@Valid @RequestBody final Employee employee) {
-        return employeeRepository.save(employee);
+    @GetMapping("/all")
+    public List<Employee> getAll() {
+        return employeeRepository.findAll();
     }
 
     /**
-     * Updates an Employee record in the Employees table.
+     * UPDATE: Updates an Employee record in the Employees table.
      * 
      * @param badgeNumber The employee badge number.
      * @param employeeDetails The updated information
@@ -77,18 +88,7 @@ public class EmployeeRestController {
     }
 
     /**
-     * Returns a list of all Employee records from the Employees table.
-     * http://localhost:8080/employees/all
-     * 
-     * @return list of all known employees
-     */
-    @GetMapping("/all")
-    public List<Employee> getAll() {
-        return employeeRepository.findAll();
-    }
-
-    /**
-     * Deletes a row from the Employees table given a badge number.
+     * DELETE: Deletes a row from the Employees table given a badge number.
      * 
      * @param badgeNumber The badge number.
      * @return ResponseEntity The response.
